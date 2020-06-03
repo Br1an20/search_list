@@ -1,0 +1,35 @@
+{% extends 'my_app/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <form action="{% url 'newsearch' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="search" placeholder="Type here">
+            <class class="right-align">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </class>
+        </form>
+    
+
+    <h2 style="text-align: center">{{ search | title }}</h2>
+    <div class="row">
+        {% for post in final_postings %}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image">
+                        <a href="{{ post.1 }}"><img src="{{ post.3 }}" alt=""></a>
+                    </div>
+                    <div class="card-content">
+                        <p>{{ post.0 }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ post.1 }}">View listing: Price {{ post.2 }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock content %}
